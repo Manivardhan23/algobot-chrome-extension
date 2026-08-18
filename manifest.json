@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "AlgoBot",
+  "version": "1.0",
+  "description": "Your AI pair programmer for technical interviews.",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["activeTab", "scripting"],
+  "host_permissions": ["https://leetcode.com/*", "https://neetcode.io/*"]
+}
