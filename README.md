@@ -44,31 +44,32 @@ git clone https://github.com/YOUR_USERNAME/algobot-extension.git
 cd algobot-extension
 ```
 
-### 2. Set up the backend
-
-```bash
-cd server
-
-# Copy the env template and add your Gemini API key
-cp .env.example .env
-# Edit .env and paste your key from https://aistudio.google.com/apikey
-
-# Install dependencies and start the server
-uv run main.py
-```
-
-> **Don't have `uv`?** Install it with: `curl -LsSf https://astral.sh/uv/install.sh | sh`
-
-The server will start at `http://127.0.0.1:8000`
-
-### 3. Load the Chrome Extension
+### 2. Load the Chrome Extension
 
 1. Open Chrome and go to `chrome://extensions`
 2. Enable **Developer Mode** (top right toggle)
 3. Click **Load Unpacked**
 4. Select the root `algobot-extension/` folder
 
+*That's it! The extension connects to the live backend on Render automatically.*
+
 ---
+
+## 🛠 Local Development (Optional)
+
+If you want to run your own backend server instead of using the live one:
+
+```bash
+cd server
+cp .env.example .env
+# Edit .env and paste your key from https://aistudio.google.com/apikey
+
+# Install dependencies and start the server
+uv run main.py
+```
+*(You will also need to update `content.js` to point to `http://127.0.0.1:8000`)*
+
+
 
 ## 🔑 Getting a Free Gemini API Key
 

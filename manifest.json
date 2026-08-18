@@ -10,7 +10,11 @@
     "service_worker": "background.js"
   },
   "permissions": ["activeTab", "scripting"],
-  "host_permissions": ["https://leetcode.com/*", "https://neetcode.io/*"],
+  "host_permissions": [
+    "https://leetcode.com/*",
+    "https://neetcode.io/*",
+    "https://algobot-backend.onrender.com/*"
+  ],
   "content_scripts": [
     {
       "matches": [

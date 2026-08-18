@@ -282,7 +282,7 @@ if (!document.getElementById("algobot-sidebar")) {
         chatBody.scrollTop = chatBody.scrollHeight;
 
         try {
-          const res = await fetch("http://127.0.0.1:8000/get-hint", {
+          const res = await fetch("https://algobot-backend.onrender.com/get-hint", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -328,7 +328,7 @@ if (!document.getElementById("algobot-sidebar")) {
         const chosenModel = btn.dataset.model;
         hintsIntro.innerHTML = `<p style="color:#a6adc8">⏳ Retrying with ${chosenModel}...</p>`;
         try {
-          const res = await fetch("http://127.0.0.1:8000/get-progressive-hints", {
+          const res = await fetch("https://algobot-backend.onrender.com/get-progressive-hints", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ problem_title: lastTitle, code: lastCode, preferred_model: chosenModel }),
@@ -451,7 +451,7 @@ if (!document.getElementById("algobot-sidebar")) {
       if (typingEl) typingEl.remove();
 
       try {
-        const res = await fetch("http://127.0.0.1:8000/get-hint", {
+        const res = await fetch("https://algobot-backend.onrender.com/get-hint", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -483,7 +483,7 @@ if (!document.getElementById("algobot-sidebar")) {
     // ── Handle HINTS mode ─────────────────────────────────────────────────
     if (event.data.mode === "hints" && isHintsFetching) {
       try {
-        const res = await fetch("http://127.0.0.1:8000/get-progressive-hints", {
+        const res = await fetch("https://algobot-backend.onrender.com/get-progressive-hints", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ problem_title: problemTitle, code: liveCode }),
