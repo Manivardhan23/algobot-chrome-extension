@@ -1,0 +1,453 @@
+/* ═══════════════════════════════════════════════
+   ALGOBOT SIDEBAR
+═══════════════════════════════════════════════ */
+
+#algobot-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  z-index: 999999;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  pointer-events: none; /* let clicks pass through the wrapper */
+}
+
+/* ── Collapse Toggle Tab ─────────────────────────────────────── */
+#algobot-toggle-tab {
+  pointer-events: all;
+  align-self: center;
+  width: 28px;
+  height: 64px;
+  background: #1e1e2e;
+  border: 1px solid #313244;
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: -3px 0 12px rgba(0,0,0,0.3);
+  transition: background 0.2s;
+  writing-mode: vertical-rl;
+  font-size: 18px;
+}
+
+#algobot-toggle-tab:hover {
+  background: #313244;
+}
+
+/* ── Main Panel ──────────────────────────────────────────────── */
+#algobot-panel {
+  pointer-events: all;
+  width: 380px;
+  height: 100vh;
+  background: #1e1e2e;
+  border-left: 1px solid #313244;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -6px 0 24px rgba(0,0,0,0.4);
+  overflow: hidden;
+}
+
+/* ── Header ──────────────────────────────────────────────────── */
+#algobot-header {
+  padding: 14px 16px 0;
+  background: #181825;
+  border-bottom: 1px solid #313244;
+  flex-shrink: 0;
+}
+
+#algobot-logo {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: #cdd6f4;
+  margin-bottom: 12px;
+  letter-spacing: 0.3px;
+}
+
+/* ── Tabs ────────────────────────────────────────────────────── */
+#algobot-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.algobot-tab {
+  flex: 1;
+  padding: 8px 0;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #6c7086;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.algobot-tab:hover {
+  color: #cdd6f4;
+}
+
+.algobot-tab.active {
+  color: #89b4fa;
+  border-bottom-color: #89b4fa;
+}
+
+/* ── Tab Content Panels ──────────────────────────────────────── */
+.algobot-tab-content {
+  display: none;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+.algobot-tab-content.active {
+  display: flex;
+}
+
+/* ═══════════════════════════════════════════════
+   CHAT TAB
+═══════════════════════════════════════════════ */
+
+#algobot-chat-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Scrollbar */
+#algobot-chat-body::-webkit-scrollbar { width: 4px; }
+#algobot-chat-body::-webkit-scrollbar-track { background: transparent; }
+#algobot-chat-body::-webkit-scrollbar-thumb { background: #45475a; border-radius: 4px; }
+
+/* ── Chat Bubbles ────────────────────────────────────────────── */
+.algobot-msg {
+  max-width: 90%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  animation: algobotFadeIn 0.2s ease;
+}
+
+.algobot-msg--bot {
+  background: #313244;
+  color: #cdd6f4;
+  align-self: flex-start;
+  border-bottom-left-radius: 3px;
+}
+
+.algobot-msg--user {
+  background: #2563eb;
+  color: #ffffff;
+  align-self: flex-end;
+  border-bottom-right-radius: 3px;
+}
+
+@keyframes algobotFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Chat Footer ─────────────────────────────────────────────── */
+#algobot-chat-footer {
+  padding: 12px 14px;
+  background: #181825;
+  border-top: 1px solid #313244;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+#algobot-input-row {
+  display: flex;
+  gap: 8px;
+}
+
+#algobot-input {
+  flex: 1;
+  background: #313244;
+  border: 1px solid #45475a;
+  border-radius: 8px;
+  padding: 9px 12px;
+  color: #cdd6f4;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+#algobot-input:focus {
+  border-color: #89b4fa;
+}
+
+#algobot-input::placeholder {
+  color: #6c7086;
+}
+
+#algobot-send-btn {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 16px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+#algobot-send-btn:hover { background: #1d4ed8; }
+#algobot-send-btn:disabled { background: #374151; cursor: not-allowed; }
+
+#algobot-clear-btn {
+  background: transparent;
+  border: 1px solid #313244;
+  border-radius: 6px;
+  color: #6c7086;
+  font-size: 12px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  align-self: flex-start;
+}
+
+#algobot-clear-btn:hover {
+  border-color: #45475a;
+  color: #cdd6f4;
+}
+
+/* ═══════════════════════════════════════════════
+   HINTS TAB
+═══════════════════════════════════════════════ */
+
+#algobot-hints-body {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+#algobot-hints-body::-webkit-scrollbar { width: 4px; }
+#algobot-hints-body::-webkit-scrollbar-track { background: transparent; }
+#algobot-hints-body::-webkit-scrollbar-thumb { background: #45475a; border-radius: 4px; }
+
+/* ── Intro Screen ────────────────────────────────────────────── */
+#algobot-hints-intro {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  text-align: center;
+  gap: 20px;
+}
+
+#algobot-hints-intro p {
+  color: #a6adc8;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+#algobot-load-hints-btn {
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+#algobot-load-hints-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+#algobot-load-hints-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Hint Cards ──────────────────────────────────────────────── */
+#algobot-hints-list {
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+}
+
+.algobot-hint-card {
+  padding: 16px 18px;
+  border-bottom: 1px solid #313244;
+  animation: algobotFadeIn 0.3s ease;
+}
+
+.algobot-hint-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.algobot-hint-text {
+  font-size: 13.5px;
+  color: #cdd6f4;
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+
+/* Card accent colors */
+.algobot-hint--basic   .algobot-hint-label { color: #a6e3a1; }
+.algobot-hint--approach .algobot-hint-label { color: #89b4fa; }
+.algobot-hint--impl    .algobot-hint-label { color: #fab387; }
+.algobot-hint--solution .algobot-hint-label { color: #f38ba8; }
+
+.algobot-hint--basic   { border-left: 3px solid #a6e3a1; }
+.algobot-hint--approach { border-left: 3px solid #89b4fa; }
+.algobot-hint--impl    { border-left: 3px solid #fab387; }
+.algobot-hint--solution { border-left: 3px solid #f38ba8; }
+
+/* Locked card */
+.algobot-hint-card.locked {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* Reveal button */
+.algobot-reveal-btn {
+  background: #313244;
+  color: #cdd6f4;
+  border: 1px solid #45475a;
+  border-radius: 7px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.algobot-reveal-btn:hover {
+  background: #45475a;
+}
+
+/* ═══════════════════════════════════════════════
+   CODE BLOCKS & SYNTAX HIGHLIGHTING
+═══════════════════════════════════════════════ */
+
+.algob-code-wrap {
+  margin: 8px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #45475a;
+  background: #11111b;
+  font-size: 12.5px;
+}
+
+.algob-code-lang {
+  background: #181825;
+  color: #6c7086;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-bottom: 1px solid #313244;
+  font-family: monospace;
+}
+
+.algob-pre {
+  margin: 0;
+  padding: 12px 14px;
+  overflow-x: auto;
+  font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "Consolas", monospace;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: #cdd6f4;
+  white-space: pre;
+  background: #11111b;
+}
+
+.algob-pre::-webkit-scrollbar { height: 4px; }
+.algob-pre::-webkit-scrollbar-track { background: transparent; }
+.algob-pre::-webkit-scrollbar-thumb { background: #45475a; border-radius: 4px; }
+
+/* Syntax token colors (Catppuccin Mocha palette) */
+.algob-kw      { color: #cba6f7; font-weight: 600; } /* purple  — keywords  */
+.algob-str     { color: #a6e3a1; }                    /* green   — strings   */
+.algob-comment { color: #585b70; font-style: italic; } /* gray   — comments  */
+.algob-num     { color: #fab387; }                    /* orange  — numbers   */
+
+/* Inline code spans e.g. `total < target` in hint text */
+.algob-inline {
+  background: #313244;
+  color: #89dceb;
+  font-family: "JetBrains Mono", "Fira Code", "Consolas", monospace;
+  font-size: 12px;
+  padding: 1px 5px;
+  border-radius: 4px;
+  border: 1px solid #45475a;
+  white-space: nowrap;
+}
+
+/* ═══════════════════════════════════════════════
+   RETRY BUTTONS (shown on 503 overload)
+═══════════════════════════════════════════════ */
+
+.algobot-retry-wrap {
+  background: #1e1e2e;
+  border: 1px solid #f38ba8;
+  border-radius: 10px;
+  padding: 12px 14px;
+  align-self: flex-start;
+  max-width: 95%;
+  animation: algobotFadeIn 0.2s ease;
+}
+
+.algobot-retry-label {
+  color: #f38ba8;
+  font-size: 13px;
+  margin: 0 0 10px 0;
+  font-weight: 500;
+}
+
+.algobot-retry-btns {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.algobot-retry-btn {
+  background: #313244;
+  color: #cdd6f4;
+  border: 1px solid #45475a;
+  border-radius: 7px;
+  padding: 7px 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.algobot-retry-btn:hover {
+  background: #45475a;
+  border-color: #89b4fa;
+  color: #89b4fa;
+}
+
+
+
