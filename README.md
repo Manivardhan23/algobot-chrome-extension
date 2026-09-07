@@ -1,107 +1,103 @@
-# 🤖 AlgoBot — AI Pair Programmer for Technical Interviews
+# AlgoBot — AI Pair Programmer for LeetCode & NeetCode
 
-AlgoBot is a Chrome Extension that acts as a free AI assistant while you solve problems on **LeetCode** and **NeetCode** — similar to NeetCode's NeatBot, but completely free.
+A Chrome extension that embeds a smart AI assistant directly into LeetCode and NeetCode problem pages. Get progressive hints, chat about your approach, or reveal a full solution — all without leaving the tab.
 
-![AlgoBot Demo](https://img.shields.io/badge/LeetCode-✓-orange) ![AlgoBot Demo](https://img.shields.io/badge/NeetCode-✓-blue) ![License](https://img.shields.io/badge/license-MIT-green)
-
----
-
-## ✨ Features
-
-- 💬 **Chat Tab** — Ask anything about your approach with full conversation memory
-- 💡 **Hints Tab** — Progressive hints from Basic → Approach → Implementation → Full Solution
-- 🎨 **Syntax Highlighting** — Code blocks rendered with proper colors (Python, JS, Java, C++)
-- 🔄 **Model Fallback** — If the AI is overloaded, choose to retry with a different Gemini model
-- ⚡ **Powered by Gemini** — Free Google AI (Gemini 3.7 Flash) for high quality coding hints
+![LeetCode](https://img.shields.io/badge/LeetCode-supported-orange?logo=leetcode) ![NeetCode](https://img.shields.io/badge/NeetCode-supported-blue) ![License](https://img.shields.io/badge/license-MIT-green) ![Powered by Gemini](https://img.shields.io/badge/AI-Gemini%20Flash-4285F4?logo=google)
 
 ---
 
-## 📁 Project Structure
+## Features
 
-```
-algobot-extension/
-├── manifest.json       # Chrome Extension config (Manifest V3)
-├── content.js          # Injects the sidebar UI into LeetCode/NeetCode
-├── inject.js           # Reads live code from Monaco/CodeMirror editor
-├── background.js       # Extension service worker
-├── styles.css          # All styles for the sidebar
-├── popup.html          # Small popup shown when clicking the extension icon
-└── server/
-    ├── api.py          # FastAPI backend — calls Gemini API
-    ├── main.py         # Server entry point
-    ├── pyproject.toml  # Python dependencies (managed by uv)
-    └── .env.example    # Template for your API key
-```
+**💬 Chat** — Ask anything about your approach. AlgoBot reads the problem and your current code so you don't have to copy-paste anything.
+
+**💡 Hints** — Four progressive hint levels revealed one at a time:
+- **Basic Hint** — nudge in the right direction
+- **Approach** — algorithm / strategy
+- **Implementation** — step-by-step breakdown
+- **Full Solution** — complete working code with syntax highlighting
+
+**🎨 Syntax Highlighting** — Code blocks are rendered with proper colors for Python, JavaScript, Java, and C++.
+
+**🔄 Model Fallback** — If Gemini is overloaded, you can retry with an alternate model without losing context.
 
 ---
 
-## 🚀 Setup & Installation
+## Installation
 
-### 1. Clone the repo
+### Load the Extension (no build step needed)
 
-```bash
-git clone https://github.com/YOUR_USERNAME/algobot-extension.git
-cd algobot-extension
-```
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/Manivardhan23/algobot-chrome-extension.git
+   ```
+2. Open Chrome and navigate to `chrome://extensions`
+3. Enable **Developer Mode** (toggle in the top-right)
+4. Click **Load Unpacked** and select the `algobot-extension/` folder
 
-### 2. Load the Chrome Extension
-
-1. Open Chrome and go to `chrome://extensions`
-2. Enable **Developer Mode** (top right toggle)
-3. Click **Load Unpacked**
-4. Select the root `algobot-extension/` folder
-
-*That's it! The extension connects to the live backend on Render automatically.*
+The extension connects to a hosted backend automatically — no server setup required.
 
 ---
 
-## 🛠 Local Development (Optional)
+## Local Development (Optional)
 
-If you want to run your own backend server instead of using the live one:
+To run your own backend instead of the hosted one:
 
 ```bash
 cd server
 cp .env.example .env
-# Edit .env and paste your key from https://aistudio.google.com/apikey
+# Add your key from https://aistudio.google.com/apikey
+# GEMINI_API_KEY="your_key_here"
 
-# Install dependencies and start the server
 uv run main.py
 ```
-*(You will also need to update `content.js` to point to `http://127.0.0.1:8000`)*
 
+Then update the API URL in `content.js` to point to `http://127.0.0.1:8000`.
 
-
-## 🔑 Getting a Free Gemini API Key
-
-1. Go to [Google AI Studio](https://aistudio.google.com/apikey)
-2. Sign in with your Google account
-3. Click **Create API Key**
-4. Copy it into `server/.env` as `GEMINI_API_KEY="your_key_here"`
-
-The free tier gives you **1,500 requests/day** — more than enough for practice sessions.
+> **Getting a free Gemini API key:** Go to [Google AI Studio](https://aistudio.google.com/apikey), sign in, and click **Create API Key**. The free tier provides 1,500 requests/day.
 
 ---
 
-## 🎯 How to Use
+## How It Works
 
-1. Open any problem on [LeetCode](https://leetcode.com/problems/) or [NeetCode](https://neetcode.io/problems/)
-2. AlgoBot sidebar appears on the right side of the screen
-3. **💬 Chat tab** — Type a question or click **Get Hint** for context-aware help
-4. **💡 Hints tab** — Click **Generate Hints** for 4 progressive hints, revealed one at a time
+AlgoBot injects a sidebar panel directly into the LeetCode/NeetCode UI. When you interact with it:
+
+1. `content.js` captures the problem title, description, and your current code from the Monaco/CodeMirror editor via `inject.js`
+2. This context is sent to a FastAPI backend (`server/api.py`)
+3. The backend calls the Gemini API and streams the response back
+4. The sidebar renders the response with syntax-highlighted code blocks
 
 ---
 
-## 🛠 Tech Stack
+## Project Structure
 
-| Part | Technology |
+```
+algobot-extension/
+├── manifest.json       # Chrome Extension config (Manifest V3)
+├── content.js          # Injects the sidebar UI + handles all interactions
+├── inject.js           # Reads live code from the Monaco/CodeMirror editor
+├── background.js       # Extension service worker
+├── styles.css          # Sidebar styles
+├── popup.html          # Extension icon popup
+└── server/
+    ├── api.py          # FastAPI backend — calls Gemini API
+    ├── main.py         # Server entry point
+    ├── pyproject.toml  # Python dependencies (managed by uv)
+    └── .env.example    # API key template
+```
+
+---
+
+## Tech Stack
+
+| Layer | Tech |
 |---|---|
 | Chrome Extension | Manifest V3, Vanilla JS |
 | Backend | Python, FastAPI, uvicorn |
-| AI | Google Gemini 3.7 Flash (free tier) |
+| AI Model | Google Gemini Flash (free tier) |
 | Package Manager | [uv](https://astral.sh/uv) |
 
 ---
 
-## 📄 License
+## License
 
 MIT — free to use, modify, and share.
