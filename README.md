@@ -22,6 +22,18 @@ A Chrome extension that embeds a smart AI assistant directly into LeetCode and N
 
 ---
 
+## Screenshots
+
+![Hints tab with progressive hint levels](screenshots/hints_tab.png)
+
+![Full solution with syntax highlighting](screenshots/full_solution.png)
+
+![Chat tab with context-aware conversation](screenshots/chat_tab.png)
+
+![Detailed implementation hints](screenshots/hints_detail.png)
+
+---
+
 ## Installation
 
 ### Load the Extension (no build step needed)
