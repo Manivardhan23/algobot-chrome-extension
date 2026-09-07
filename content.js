@@ -472,7 +472,7 @@ if (!document.getElementById("algobot-sidebar")) {
           appendMsg("assistant", "⚠️ " + (data.hint || "Something went wrong."));
         }
       } catch {
-        appendMsg("assistant", "❌ Can't reach backend. Is `uv run main.py` running?");
+        appendMsg("assistant", "❌ Can't reach backend. Please check your connection or try again.");
       } finally {
         isChatFetching = false;
         sendBtn.disabled = false;
@@ -502,7 +502,7 @@ if (!document.getElementById("algobot-sidebar")) {
           loadHintsBtn.innerText = "✨ Generate Hints";
         }
       } catch {
-        hintsIntro.querySelector("p").innerText = "❌ Can't reach backend. Is `uv run main.py` running?";
+        hintsIntro.querySelector("p").innerText = "❌ Can't reach backend. Please check your connection or try again.";
         loadHintsBtn.disabled = false;
         loadHintsBtn.innerText = "✨ Generate Hints";
       } finally {
@@ -510,4 +510,27 @@ if (!document.getElementById("algobot-sidebar")) {
       }
     }
   });
+
+  // ── URL Change Detection (Reset state on new problem) ───────────────────
+  let lastProblemUrl = location.pathname;
+  setInterval(() => {
+    if (location.pathname !== lastProblemUrl) {
+      lastProblemUrl = location.pathname;
+      
+      // Clear Chat
+      conversationHistory = [];
+      chatBody.innerHTML = `<div class="algobot-msg algobot-msg--bot">🔄 Switched to a new problem! Ask me anything.</div>`;
+      
+      // Clear Hints
+      allHints = [];
+      hintsRevealed = 0;
+      hintsList.innerHTML = "";
+      hintsIntro.style.display = "flex";
+      hintsList.style.display = "none";
+      loadHintsBtn.innerText = "✨ Generate Hints";
+      loadHintsBtn.disabled = false;
+      isHintsFetching = false;
+      isChatFetching = false;
+    }
+  }, 1000);
 }
